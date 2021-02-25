@@ -21,18 +21,23 @@ def brilliant_sort(vec):
             return vec
 
 def main():
-    vec = [0, 1]
-    for i in range(2, 10):
-        vec.append(i)
-        f = open(("data_" + str(i+1) + "_shuffle.txt"), "w") 
+    vec = []
+    for z in range(2,11):
+        for y in range(0, 1000):
+            tempvec = []
+            for x in range(0,z):
+                tempvec.append(random.randint(1,10))
+            vec.append(tempvec)
+
+    for i in range(2, 11):
+        f = open(("data_" + str(i+1) + "_index_random.txt"), "w") 
         whole_time = time.time()
         for x in range(1000):
-            random.shuffle(vec)
             if (x % 25 == 0):
-                print(x, i+1)
+                print(x, i)
             start_time = time.time()
-            shuffle_sort(vec)
-            f.write(str(time.time() - start_time) + " seconds\n")
+            brilliant_sort(vec[x + (i*1000)])
+            f.write(str(time.time() - start_time) + "\n")
         f.write("Average time: " + str((time.time()-whole_time)/1000) + " Seconds             Total time: " + str((time.time()-whole_time)) + " Seconds\n")
         f.close()
 
